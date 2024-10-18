@@ -1,0 +1,203 @@
+---
+title: "Resolución Problemas"
+output: "Roberto González Lozano"
+  pdf_document:
+    toc: true
+    number_sections: true
+    toc_depth: 5
+lang: es
+number-sections: true
+encoding: UTF-8
+toc: true
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r include=FALSE}
+source("teoriadecision_funciones_incertidumbre.R")
+```
+
+## Problema 1:
+
+Aplicar los criterios de decisión bajo incertidumbre a los problemas
+cuya matriz de valores numéricos vienen dadas en la tabla siguiente bajo
+dos puntos de vistas:
+
+```{r echo=TRUE}
+tablaSCG=crea.tablaX(c(2,5,7,2,-2,9,5,3,4,5,3,1), numalternativas = 3,numestados = 4)
+tablaSCG
+```
+
+1)  **Caso Favorable (beneficios)**
+2)  **Caso Desfavorable (costes)**
+
+### Caso Favorable (beneficios)
+
+```{r CASO FAVORABLE}
+#Criterio de Wald
+
+waldSCG = criterio.Wald(tablaSCG,T)
+waldSCG
+
+# Criterio Optimista
+
+optimistaSCG = criterio.Optimista(tablaSCG,T)
+optimistaSCG
+
+# Criterio Hurwicz
+
+hurwiczSCG = criterio.Hurwicz(tablaSCG, 0.5, T)
+hurwiczSCG
+
+
+# Criterio Savage
+
+savageSCG = criterio.Savage(tablaSCG,T)
+savageSCG
+
+# Criterio Laplace
+
+laplaceSCG = criterio.Laplace(tablaSCG,T)
+laplaceSCG
+
+# Criterio Punto Ideal
+
+pidealSCG = criterio.PuntoIdeal(tablaSCG,T)
+pidealSCG
+
+#Todos los criterios
+
+todosSCG = criterio.Todos(tablaSCG, alfa=0.5, favorable = T)
+todosSCG
+
+```
+
+**Por tanto, en caso favorable, selecciono la alternativa d1.**
+
+### Caso Desfavorable (costes)
+
+```{r CASO DESFAVORABLE}
+#Criterio de Wald
+
+waldSCG2 = criterio.Wald(tablaSCG,F)
+waldSCG2
+
+# Criterio Optimista
+
+optimistaSCG2 = criterio.Optimista(tablaSCG,F)
+optimistaSCG2
+
+# Criterio Hurwicz
+
+hurwiczSCG2 = criterio.Hurwicz(tablaSCG, 0.5, F)
+hurwiczSCG2
+
+
+# Criterio Savage
+
+savageSCG2 = criterio.Savage(tablaSCG,F)
+savageSCG2
+
+# Criterio Laplace
+
+laplaceSCG2 = criterio.Laplace(tablaSCG,F)
+laplaceSCG2
+
+# Criterio Punto Ideal
+
+pidealSCG2 = criterio.PuntoIdeal(tablaSCG,F)
+pidealSCG2
+
+#Todos los criterios
+
+todosSCG2 = criterio.Todos(tablaSCG, alfa=0.5, favorable = F)
+todosSCG2
+
+```
+
+**Por tanto, en caso desfavorable, selecciono la alternativa d2.**
+
+## Problema 2:
+
+Luis De La Fuente, seleccionador internacional de España, debe presentar
+la lista de futbolistas convocados para la posiciones de delanteros de
+cara al Mundial 2026. Debe llevar 5 personas, y hasta ahora ya tiene 4
+seleccionadas. Para el último puesto que queda disponible, tiene tres
+futbolistas candidatas, los cuales tienen puntuaciones en cada uno de
+estas habilidades (pase, velocidad y gol, calculadas sobre 100):
+
+-   **Ayoze** es un jugador del Villarreal que en pase tiene una
+    puntuación de 55, en velocidad 78 y en gol 81.
+
+-   **Isi Palazón**, del Rayo Vallecano, tiene unas puntuaciones de 66
+    en pase, 77 en velocidad y 74 en gol.
+
+-   **Samu Orodion**, del Oporto, tiene puntuación de 80 en pase, 62 en
+    velocidad y 73 en gol.
+
+Decidir qué futbolista debe ser convocado para el Mundial 2028.
+
+**Solución**
+
+1\. Crear la matriz de datos:
+
+```{r}
+datosSCG <- matrix(data = c(55,78,81,66,77,74,80,62,73), nrow = 3, byrow = T)
+rownames(datosSCG) <- c("Ayoze", "Isi Palazón", "Samu Orodion")
+colnames(datosSCG) <- c("pase", "velocidad", "gol")
+datosSCG
+```
+
+Estamos ante un problema de decisión de un solo decisor, que tiene un
+modelo de beneficios (caso favorable). Con los datos de la tabla
+anterior:
+
+```{r}
+#Criterio de Wald
+
+waldSCG = criterio.Wald(datosSCG,T)
+waldSCG
+
+# Criterio Optimista
+
+optimistaSCG = criterio.Optimista(datosSCG,T)
+optimistaSCG
+
+# Criterio Hurwicz
+
+hurwiczSCG = criterio.Hurwicz(datosSCG, 0.5, T)
+hurwiczSCG
+
+
+# Criterio Savage
+
+savageSCG = criterio.Savage(datosSCG,T)
+savageSCG
+
+# Criterio Laplace
+
+laplaceSCG = criterio.Laplace(datosSCG,T)
+laplaceSCG
+
+# Criterio Punto Ideal
+
+pidealSCG = criterio.PuntoIdeal(datosSCG,T)
+pidealSCG
+
+#Todos los criterios
+
+todosSCG = criterio.Todos(datosSCG, alfa=0.5, favorable = T)
+todosSCG
+
+```
+
+***CONCLUSIÓN:***
+
+**Todos los criterios empleados recomiendan convocar a Isi Palazón**, a
+excepción del criterio Optimista, que recomienda a Ayoze , ya que el
+criterio optimista siempre actúa en la mejor situación posible, en la
+que Ayoze, en este caso, haría una gran actuación a nivel de goles, la
+cuál sería determinante.
+
+**Finalmente, se selecciona a Isi Palazón.**
