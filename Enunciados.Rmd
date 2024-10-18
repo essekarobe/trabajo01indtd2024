@@ -1,0 +1,60 @@
+---
+title: "Enunciado de problemas"
+author: "Roberto González Lozano"
+date: "2024-18-03"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    toc_depth: 5
+lang: es
+number-sections: true
+toc: true
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+\newpage
+
+## Problema 1
+
+Aplicar los criterios de decisión bajo incertidumbre a los problemas
+cuya matriz de valores numéricos vienen dadas en la tabla siguiente bajo
+dos puntos de vistas:
+
+```{r include=FALSE}
+source("teoriadecision_funciones_incertidumbre.R")
+
+```
+
+```{r echo=TRUE}
+tablaSCG=crea.tablaX(c(2,5,7,2,-2,9,5,3,4,5,3,1), numalternativas = 3,numestados = 4)
+tablaSCG
+```
+
+1)  **Caso Favorable (beneficios)**
+2)  **Caso Desfavorable (costes)**
+
+## Problema 2
+
+Luis De La Fuente, seleccionador internacional de España, debe presentar
+la lista de futbolistas convocados para la posiciones de delanteros de
+cara al Mundial 2026. Debe llevar 5 personas, y hasta ahora ya tiene 4
+seleccionadas. Para el último puesto que queda disponible, tiene tres
+futbolistas candidatas, los cuales tienen puntuaciones en cada uno de
+estas habilidades (pase, velocidad y gol, calculadas sobre 100):
+
+-   **Ayoze** es un jugador del Villarreal que durante la temporada
+    anterior, según los datos recogidos por Transfermarkt, tiene una
+    puntuación de pase de 55, en velocidad 78 y en gol 81.
+
+-   **Isi Palazón**, del Rayo Vallecano, que durante la temporada
+    anterior, según los datos recogidos por Transfermarkt, tiene una
+    puntuación de pase de 66, 77 en velocidad y 74 en gol.
+
+-   **Samu Orodion**, del Oporto, que durante la temporada anterior,
+    según los datos recogidos por Transfermarkt, tiene una puntuación de
+    pase de 80, 62 en velocidad y 73 en gol.
+
+Decidir qué futbolista debe ser convocado para el Mundial 2028.
